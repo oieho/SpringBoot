@@ -28,10 +28,10 @@ public class MyData {
 	@Column(nullable = true)
 	private String memo;
 	
-	public long getID() {
+	public long getId() {
 		return id;
 	}
-	public void  setID(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

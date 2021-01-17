@@ -17,7 +17,7 @@ public class defaultController {
 	MyDataRepository repository;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView index(ModelAndView mav) {
+	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("msg","this is sample content.");
 		Iterable<MyData> list = repository.findAll();
@@ -27,8 +27,7 @@ public class defaultController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
-	public ModelAndView form(
-			@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
+	public ModelAndView form(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		repository.saveAndFlush(mydata);
 		return new ModelAndView("redirect:/");
 	}
