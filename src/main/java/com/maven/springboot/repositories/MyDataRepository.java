@@ -7,5 +7,5 @@ import com.maven.springboot.MyData;
 
 @Repository
 public interface MyDataRepository extends JpaRepository<MyData, Long>{
-
+	public MyData findById(long name);
 }
