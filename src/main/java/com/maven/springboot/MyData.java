@@ -27,16 +27,16 @@ public class MyData {
 	private long id;
 	
 	@Column(length = 50, nullable = false)
-	@NotEmpty
+	@NotEmpty(message="공백 불가")
 	private String name;
 	
 	@Column(length = 200, nullable = true)
-	@Email
+	@Email(message="메일 주소만")
 	private String mail;
 	
 	@Column(nullable = true)
-	@Min(0)
-	@Max(200)
+	@Min(value=0,message="0이상")
+	@Max(value=200,message="200이하")
 	private Integer age;
 	
 	@Column(nullable = true)
