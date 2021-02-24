@@ -32,7 +32,9 @@ td { padding:5px; color:black; background:#e0e0ff;}
 		<div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}" th:errorclass="err"></div>
 	</td></tr>
 <tr><td><label for="memo">메모</label></td>
-	<td><textarea name="memo" th:field="*{memo}" rows="5" cols="20"></textarea></td></tr>
+	<td><textarea name="memo" th:text="*{memo}" th:errorclass="err" rows="5" cols="20"></textarea>
+		<div th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}" th:errorclass="err"></div>
+	</td></tr>
 <tr><td></td><td><input type="submit" /></td></tr>
 </form>
 </table>
