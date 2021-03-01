@@ -1,6 +1,8 @@
 package com.maven.springboot;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,18 @@ public class defaultController {
 
 	@Autowired
 	MyDataRepository repository;
+	
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	MyDataDaoImpl dao;
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("msg", "this is sample content.");
-		Iterable<MyData> list = repository.findAll();
+		Iterable<MyData> list = dao.getAll();
 		mav.addObject("datalist",list);
 		return mav;
 	}
@@ -50,6 +58,7 @@ public class defaultController {
 
 	@PostConstruct
 	public void init() {
+		dao = new MyDataDaoImpl(entityManager);
 		MyData d1 = new MyData();
 		d1.setName("kim");
 		d1.setAge(123);
