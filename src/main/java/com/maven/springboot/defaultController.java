@@ -24,9 +24,7 @@ public class defaultController {
 	@Autowired
 	MyDataRepository repository;
 	
-	@PersistenceContext
-	EntityManager entityManager;
-	
+	@Autowired
 	MyDataDaoImpl dao;
 	
 
@@ -58,7 +56,6 @@ public class defaultController {
 
 	@PostConstruct
 	public void init() {
-		dao = new MyDataDaoImpl(entityManager);
 		MyData d1 = new MyData();
 		d1.setName("kim");
 		d1.setAge(123);

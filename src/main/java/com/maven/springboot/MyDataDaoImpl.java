@@ -3,6 +3,7 @@ package com.maven.springboot;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Repository;
 public class MyDataDaoImpl implements MyDataDao<MyData> {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private EntityManager entityManager;
+	@PersistenceContext
+	EntityManager entityManager;
 	
 	public MyDataDaoImpl() {
 		super();
