@@ -1,8 +1,9 @@
 package com.maven.springboot;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -106,5 +107,21 @@ public class defaultController {
 	public ModelAndView remove(@RequestParam long id, ModelAndView mav) {
 		repository.deleteById(id);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public ModelAndView search(HttpServletRequest request, ModelAndView mav) {
+		mav.setViewName("find");
+		String param = request.getParameter("fstr");
+		if (param=="") {
+			mav = new ModelAndView("redirect:/find");
+		} else {
+			mav.addObject("title","Find result");
+			mav.addObject("msg","「"+ param + "」의 검색 결과");
+			mav.addObject("value", param);
+			List<MyData> list = dao.find(param);
+			mav.addObject("datalist", list);
+		}
+		return mav;
 	}
 }
