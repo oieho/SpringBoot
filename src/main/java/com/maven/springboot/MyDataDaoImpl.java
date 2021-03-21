@@ -43,7 +43,7 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 	@Override
 	public List<MyData> find(String fstr){
 		List<MyData> list = null;
-		String qstr = "from MyData where id = :?1 or name like :?2 or mail like :?3";
+		String qstr = "from MyData where id = ?1 or name like ?2 or mail like ?3";
 		Long fid = 0L;
 		try {
 			fid = Long.parseLong(fstr);

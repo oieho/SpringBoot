@@ -109,6 +109,17 @@ public class defaultController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	public ModelAndView find(ModelAndView mav) {
+		mav.setViewName("find");
+		mav.addObject("title", "Find Page");
+		mav.addObject("msg","MyData의 예제입니다.");
+		mav.addObject("value","");
+		Iterable<MyData> list = dao.getAll();
+		mav.addObject("datalist", list);
+		return mav;
+	}
+	
 	@RequestMapping(value = "/find", method = RequestMethod.POST)
 	public ModelAndView search(HttpServletRequest request, ModelAndView mav) {
 		mav.setViewName("find");
