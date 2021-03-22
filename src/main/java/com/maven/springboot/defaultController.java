@@ -32,8 +32,9 @@ public class defaultController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
-		mav.addObject("msg", "this is sample content.");
-		Iterable<MyData> list = dao.getAll();
+		mav.addObject("title","Find Page");
+		mav.addObject("msg", "MyData의 예제입니다.");
+		Iterable<MyData> list = repository.findAllOrderByName(); //dao.getAll();
 		mav.addObject("datalist",list);
 		return mav;
 	}
