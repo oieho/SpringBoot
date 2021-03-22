@@ -36,7 +36,8 @@ public class defaultController {
 		mav.addObject("msg", "MyData의 예제입니다.");
 //		Iterable<MyData> list = repository.findAllOrderByName(); //dao.getAll();
 //		Iterable<MyData> list = dao.findByAge(10, 40);
-		Iterable<MyData> list = repository.findByAge(10, 40);
+//		Iterable<MyData> list = repository.findByAge(10, 40);
+		Iterable<MyData> list = dao.getAll();
 		mav.addObject("datalist",list);
 		return mav;
 	}
