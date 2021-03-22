@@ -50,7 +50,7 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 		} catch (NumberFormatException e) {
 			//e.printStackTrace();
 		}
-		Query query = entityManager.createQuery(qstr).setParameter(1, fid).setParameter(2, "%" + fstr + "%").setParameter(3, fstr + "@%");
+		Query query = entityManager.createNamedQuery("findWithName").setParameter("fname", "%" + fstr + "%");
 		list = query.getResultList();
 		return list;
 	}
