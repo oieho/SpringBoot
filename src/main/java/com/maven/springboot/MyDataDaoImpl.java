@@ -27,6 +27,8 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 	}
 	@Override
 	public List<MyData> getAll() {
+		int offset = 1;
+		int limit = 2;
 //		Query query = entityManager.createQuery("from MyData");
 //		List<MyData> list = query.getResultList();
 //		entityManager.close();
@@ -35,7 +37,7 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 		CriteriaQuery<MyData> query = builder.createQuery(MyData.class);
 		Root<MyData> root = query.from(MyData.class);
 		query.select(root).orderBy(builder.asc(root.get("name")));
-		list = (List<MyData>)entityManager.createQuery(query).getResultList();
+		list = (List<MyData>)entityManager.createQuery(query).setFirstResult(offset).setMaxResults(limit).getResultList();
 		return list;
 	}
 
