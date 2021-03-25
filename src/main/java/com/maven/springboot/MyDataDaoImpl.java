@@ -51,16 +51,12 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 	
 	@Override
 	public List<MyData> find(String fstr){
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<MyData> query = builder.createQuery(MyData.class);
+		Root<MyData> root = query.from(MyData.class);
+		query.select(root).where(builder.equal(root.get("name"),fstr));
 		List<MyData> list = null;
-		String qstr = "from MyData where id = ?1 or name like ?2 or mail like ?3";
-		Long fid = 0L;
-		try {
-			fid = Long.parseLong(fstr);
-		} catch (NumberFormatException e) {
-			//e.printStackTrace();
-		}
-		Query query = entityManager.createNamedQuery("findWithName").setParameter("fname", "%" + fstr + "%");
-		list = query.getResultList();
+		list = (List<MyData>)entityManager.createQuery(query).getResultList();
 		return list;
 	}
 	
