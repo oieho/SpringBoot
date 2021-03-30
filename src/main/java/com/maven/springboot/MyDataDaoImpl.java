@@ -25,6 +25,7 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 	public MyDataDaoImpl(EntityManager manager) {
 		entityManager = manager;
 	}
+	
 	@Override
 	public List<MyData> getAll() {
 		int offset = 1;
