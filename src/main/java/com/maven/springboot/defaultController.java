@@ -28,7 +28,9 @@ public class defaultController {
 	@Autowired
 	MyDataDaoImpl dao;
 	
-
+	@Autowired
+	MyDataService service;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
@@ -37,7 +39,8 @@ public class defaultController {
 //		Iterable<MyData> list = repository.findAllOrderByName(); //dao.getAll();
 //		Iterable<MyData> list = dao.findByAge(10, 40);
 //		Iterable<MyData> list = repository.findByAge(10, 40);
-		Iterable<MyData> list = dao.getAll();
+//		Iterable<MyData> list = dao.getAll();
+		List<MyData> list = service.getAll();
 		mav.addObject("datalist",list);
 		return mav;
 	}
@@ -119,7 +122,8 @@ public class defaultController {
 		mav.addObject("title", "Find Page");
 		mav.addObject("msg","MyData의 예제입니다.");
 		mav.addObject("value","");
-		Iterable<MyData> list = dao.getAll();
+//		Iterable<MyData> list = dao.getAll();
+		List<MyData> list = service.getAll();
 		mav.addObject("datalist", list);
 		return mav;
 	}
@@ -134,7 +138,8 @@ public class defaultController {
 			mav.addObject("title","Find result");
 			mav.addObject("msg","「"+ param + "」의 검색 결과");
 			mav.addObject("value", param);
-			List<MyData> list = dao.find(param);
+//			List<MyData> list = dao.find(param);
+			List<MyData> list = service.find(param);
 			mav.addObject("datalist", list);
 		}
 		return mav;
