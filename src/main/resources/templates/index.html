@@ -2,6 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script th:inline="javascript">
+$(document).ready(function(){
+	var num = /*[[${param.id[0]}]]*/
+	$.get("/rest/" + num, null, callback);
+});
+function callback(result){
+	$('#obj').append('<li>id: ' + result.id + '</li>');
+	$('#obj').append('<li>name: ' + result.name + '</li>');
+	$('#obj').append('<li>mail: ' + result.mail + '</li>');
+	$('#obj').append('<li>age: ' + result.age + '</li>');
+	$('#obj').append('<li>memo: ' + result.memo + '</li>');
+}
+</script>
 <style>
 h1 { font-size:18pt; font-weight:bold; color:gray; }
 body { font-size:13pt; color:gray; margin:5px 25px; }
@@ -10,11 +24,12 @@ th { padding:5px; color:white; background:darkgray; }
 td { padding:5px; color:black; background:#e0e0ff;}
 .err { color:red; }
 </style>
-<title>Insert title here</title>
+<title>top page</title>
 </head>
 <body>
 <h1 th:text="#{content.title}">Hello Page</h1>
 <p th:text="${msg}"></p>
+<ol id="obj"></ol>
 <table>
 <tr><th>ID</th><th>이름</th><th>메일</th><th>연령</th><th>메모(tel)</th></tr>
 <tr th:each="obj : ${datalist}">
