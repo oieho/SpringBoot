@@ -31,6 +31,9 @@ public class defaultController {
 	@Autowired
 	MyDataService service;
 	
+	@Autowired
+	MyDataBean myDataBean;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
@@ -84,7 +87,7 @@ public class defaultController {
 		repository.saveAndFlush(d3);
 	}
 	
-	@RequestMapping(value = "/edit/{id}, method = RequestMethod.GET")
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView edit(@ModelAttribute MyData mydata, @PathVariable int id, ModelAndView mav) {
 		mav.setViewName("edit");
 		mav.addObject("title", "edit mydata.");
@@ -144,4 +147,15 @@ public class defaultController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView indexById(@PathVariable long id, ModelAndView mav) {
+		mav.setViewName("pickup");
+		mav.addObject("title", "Pickup Page");
+		String table = "<table>" + myDataBean.getTableTagById(id) + "</table>";
+		mav.addObject("msg","pickup data id = " + id);
+		mav.addObject("data",table);
+		return mav;
+	}
+
 }

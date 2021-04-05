@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.maven.springboot.MyData;
 
 @Repository
-public interface MyDataRepository extends JpaRepository<MyData, Long>{
-	public MyData findById(long name);
+public interface MyDataRepository extends JpaRepository<MyData, Long> {
+	public MyData findById(long id);
 	public List<MyData> findByNameLike(String name);
 	public List<MyData> findByIdIsNotNullOrderByIdDesc();
 	public List<MyData> findByAgeGreaterThan(Integer age);

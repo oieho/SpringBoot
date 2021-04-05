@@ -14,17 +14,17 @@ public class MyDataRestController {
 	private MyDataService service;
 	@Autowired
 	MySampleBean bean;
-	
+
 	@RequestMapping("/rest")
-	public List<MyData> restAll(){
+	public List<MyData> restAll() {
 		return service.getAll();
 	}
-	
+
 	@RequestMapping("/rest/{num}")
 	public MyData restBy(@PathVariable int num) {
 		return service.get(num);
 	}
-	
+
 	@RequestMapping("/count")
 	public int count() {
 		return bean.count();
