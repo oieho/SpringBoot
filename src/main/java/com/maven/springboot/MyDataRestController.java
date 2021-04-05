@@ -12,6 +12,8 @@ public class MyDataRestController {
 
 	@Autowired
 	private MyDataService service;
+	@Autowired
+	MySampleBean bean;
 	
 	@RequestMapping("/rest")
 	public List<MyData> restAll(){
@@ -21,5 +23,10 @@ public class MyDataRestController {
 	@RequestMapping("/rest/{num}")
 	public MyData restBy(@PathVariable int num) {
 		return service.get(num);
+	}
+	
+	@RequestMapping("/count")
+	public int count() {
+		return bean.count();
 	}
 }
