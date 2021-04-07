@@ -57,6 +57,34 @@ public class defaultController {
 		return new ModelAndView("redirect:/");
 	}
 
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	public ModelAndView find(ModelAndView mav) {
+		mav.setViewName("find");
+		mav.addObject("title","Find Page");
+		mav.addObject("msg","MyData의 예제입니다.");
+		mav.addObject("value","");
+		List<MyDataMongo> list = repository2.findAll();
+		mav.addObject("datalist", list);
+		return mav;
+	}
+
+	@RequestMapping(value = "/find", method = RequestMethod.POST)
+	public ModelAndView search(
+			@RequestParam("find") String param,
+			ModelAndView mav) {
+		mav.setViewName("find");
+		if (param == ""){
+			mav = new ModelAndView("redirect:/find");
+		} else {
+			mav.addObject("title","Find result");
+			mav.addObject("msg","「" + param + "」의 검색 결과");
+			mav.addObject("value",param);
+			List<MyDataMongo> list = repository2.findByName(param);
+			mav.addObject("datalist", list);
+		}
+		return mav;
+	}
+	
 //	@RequestMapping(value = "/", method = RequestMethod.GET)
 //	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 //		mav.setViewName("index");
@@ -149,34 +177,34 @@ public class defaultController {
 		return new ModelAndView("redirect:/");
 	}
 
-	@RequestMapping(value = "/find", method = RequestMethod.GET)
-	public ModelAndView find(ModelAndView mav) {
-		mav.setViewName("find");
-		mav.addObject("title", "Find Page");
-		mav.addObject("msg", "MyData의 예제입니다.");
-		mav.addObject("value", "");
-//		Iterable<MyData> list = dao.getAll();
-		List<MyData> list = service.getAll();
-		mav.addObject("datalist", list);
-		return mav;
-	}
-
-	@RequestMapping(value = "/find", method = RequestMethod.POST)
-	public ModelAndView search(HttpServletRequest request, ModelAndView mav) {
-		mav.setViewName("find");
-		String param = request.getParameter("fstr");
-		if (param == "") {
-			mav = new ModelAndView("redirect:/find");
-		} else {
-			mav.addObject("title", "Find result");
-			mav.addObject("msg", "「" + param + "」의 검색 결과");
-			mav.addObject("value", param);
-//			List<MyData> list = dao.find(param);
-			List<MyData> list = service.find(param);
-			mav.addObject("datalist", list);
-		}
-		return mav;
-	}
+//	@RequestMapping(value = "/find", method = RequestMethod.GET)
+//	public ModelAndView find(ModelAndView mav) {
+//		mav.setViewName("find");
+//		mav.addObject("title", "Find Page");
+//		mav.addObject("msg", "MyData의 예제입니다.");
+//		mav.addObject("value", "");
+////		Iterable<MyData> list = dao.getAll();
+//		List<MyData> list = service.getAll();
+//		mav.addObject("datalist", list);
+//		return mav;
+//	}
+//
+//	@RequestMapping(value = "/find", method = RequestMethod.POST)
+//	public ModelAndView search(HttpServletRequest request, ModelAndView mav) {
+//		mav.setViewName("find");
+//		String param = request.getParameter("fstr");
+//		if (param == "") {
+//			mav = new ModelAndView("redirect:/find");
+//		} else {
+//			mav.addObject("title", "Find result");
+//			mav.addObject("msg", "「" + param + "」의 검색 결과");
+//			mav.addObject("value", param);
+////			List<MyData> list = dao.find(param);
+//			List<MyData> list = service.find(param);
+//			mav.addObject("datalist", list);
+//		}
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView indexById(@PathVariable long id, ModelAndView mav) {
