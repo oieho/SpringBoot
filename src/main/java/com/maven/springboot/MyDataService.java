@@ -47,7 +47,7 @@ public class MyDataService {
 	}
 	
 	public Page<MyData> getMyDataInPage(Integer pageNumber){
-		PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
+		PageRequest pageRequest = new PageRequest(pageNumber - 1, PAGE_SIZE);
 		return repository.findAll(pageRequest);
 	}
 }

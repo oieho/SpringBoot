@@ -10,4 +10,9 @@ public class MyBootAppConfig {
 	MyDataBean myDataBean() {
 		return new MyDataBean();
 	}
+	
+	@Bean
+	MyTLDialect myTLDialect() {
+		return new MyTLDialect();
+	}
 }

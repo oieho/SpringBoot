@@ -10,7 +10,7 @@ public class MyDataBean {
 	MyDataRepository repository;
 	
 	public String getTableTagById(Long id) {
-		MyData data = repository.findById(id).get();
+		MyData data = repository.findById(id);
 		String result = "<tr><td>" + data.getName() + "</td><td>" + data.getMail() + "</td><td>" + data.getAge() + "</td><td>" + data.getMemo() + "</td></tr>";
 		return result;
 	}

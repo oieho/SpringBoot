@@ -86,6 +86,12 @@ public class defaultController {
 		d3.setMail("choi@happy");
 		d3.setMemo("070777777");
 		repository.saveAndFlush(d3);
+		MyData d4 = new MyData();
+		d4.setName("cdhoi");
+		d4.setAge(37);
+		d4.setMail("chodi@happy");
+		d4.setMemo("0710777777");
+		repository.saveAndFlush(d4);
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -116,7 +122,7 @@ public class defaultController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@Transactional(readOnly=false)
 	public ModelAndView remove(@RequestParam long id, ModelAndView mav) {
-		repository.deleteById(id);
+		repository.delete(id);
 		return new ModelAndView("redirect:/");
 	}
 	
