@@ -30,9 +30,7 @@ td {
 	color: black;
 	background: #e0e0ff;
 }
-table.navi { width:100%; background:white; }
-table.navi tr { background:white; }
-table.navi tr td { background: white; }
+
 .err {
 	color: red;
 }
@@ -44,25 +42,34 @@ table.navi tr td { background: white; }
 	<p th:text="${msg}"></p>
 	<ol id="obj"></ol>
 	<table>
-	<form method="post" action="/">
-	<tr><td><label for="name">이름</label></td>
-		<td><input type="text" name="name" /></td></tr>
-	<tr><td><label for="memo">메모</label></td>
-		<td><textarea name="memo" cols="20" rows="5"></textarea></td></tr>
-	<tr><td></td><td><input type="submit" /></td></tr>
-	</form>
-	</table>
-	<hr />
-	<table>
 		<tr>
+			<th>ID</th>
 			<th>이름</th>
-			<th>메모</th>
-			<th>일시</th>
+			<th>메일</th>
+			<th>연령</th>
+			<th>메모(tel)</th>
 		</tr>
 		<tr th:each="obj : ${datalist}">
+			<td th:text="${obj.id}"></td>
 			<td th:text="${obj.name}"></td>
+			<td th:text="${obj.mail}"></td>
+			<td th:text="${obj.age}"></td>
 			<td th:text="${obj.memo}"></td>
-			<td th:text="${obj.date}"></td>
+		</tr>
+		<tr>
+		<td colspan="5">
+			<table>
+				<tr>
+					<td><div style="text-align: left;">
+							<a th:href="${#myTLHelper?.prevUrl(pagenumber)}">← Previous</a>
+						</div></td>
+					<td><div style="text-align: center;">page</div></td>
+					<td><div style="text-align: right;">
+							<a th:href="${#myTLHelper?.nextUrl(pagenumber)}">Next →</a>
+						</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 	</table>
 </body>
